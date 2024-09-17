@@ -8,7 +8,7 @@ export class CreateProductoDto {
     @IsNumber()
     @IsPositive()
     @IsOptional()
-    price?: number;
+    precio?: number;
 
     @IsString()
     @IsOptional()

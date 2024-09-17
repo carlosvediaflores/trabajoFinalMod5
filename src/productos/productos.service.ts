@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Producto } from './entities/producto.entity';
 import { FilterDto } from './dto/filter-producto.dto';
+import { isUUID } from 'class-validator';
 
 @Injectable()
 export class ProductosService {
@@ -24,7 +25,13 @@ export class ProductosService {
       return product;
       
     } catch (error) {
-      this.handleDBExceptions(error);
+      if (error.code === '23505') {
+        throw new BadRequestException(
+          `Producto ya existe registrado con ${JSON.stringify(error.detail)}`,
+        );
+      }
+      console.log(error);
+      throw new InternalServerErrorException(`Revisar los Logs`);
     }
 
   }
@@ -43,15 +50,30 @@ export class ProductosService {
   
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} producto`;
+  async findOne(term: string) {
+    let producto: Producto;
+    if ( isUUID(term) ) {
+      producto = await this.productRepository.findOneBy({ id: term });
+    } else {
+      const queryBuilder = this.productRepository.createQueryBuilder(); 
+      producto = await queryBuilder
+        .where('UPPER(nombre) =:nombre or slug =:slug', {
+          nombre: term.toUpperCase(),
+          slug: term.toLowerCase(),
+        }).getOne();
+    }
+
+
+    if ( !producto ) 
+      throw new NotFoundException(`Producto con ${ term } no existe`);
+    return producto
   }
 
-  update(id: number, updateProductoDto: UpdateProductoDto) {
+  update(id: string, updateProductoDto: UpdateProductoDto) {
     return `This action updates a #${id} producto`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} producto`;
   }
 }
