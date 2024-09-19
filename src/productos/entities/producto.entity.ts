@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Categoria } from "src/categorias/entities/categoria.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Producto {
@@ -20,18 +21,19 @@ export class Producto {
         type: 'text',
         nullable: true
     })
-    description: string;
+    descripcion: string;
 
-    @Column('int', {
-        default: 0
-    })
-    stock: number;
-
+    @Column({ default: "ACTIVO"})
+    estado: string
+    
     @Column('text', {
         array: true,
         default: []
     })
     image: string[];
+    
+    @ManyToOne(() => Categoria, categoria => categoria.productos)
+    categoria: Categoria; // un producto pertenece a una categoria
 
    
 }

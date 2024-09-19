@@ -12,19 +12,18 @@ export class CreateProductoDto {
 
     @IsString()
     @IsOptional()
-    description?: string;
+    descripcion?: string;
 
     @IsString()
     @IsOptional()
-    slug?: string;
-
-    @IsInt()
-    @IsPositive()
-    @IsOptional()
-    stock?: number; 
+    estado?: string;
 
     @IsString({ each: true })
     @IsArray()
     @IsOptional()
     image: string[];
+
+    @IsString()
+    idCategoria: string;
+
 }

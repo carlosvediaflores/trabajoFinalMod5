@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { Producto } from './entities/producto.entity';
 import { FilterDto } from './dto/filter-producto.dto';
 import { isUUID } from 'class-validator';
+import { Categoria } from 'src/categorias/entities/categoria.entity';
 
 @Injectable()
 export class ProductosService {
@@ -14,6 +15,10 @@ export class ProductosService {
 
     @InjectRepository(Producto)
     private readonly productRepository: Repository<Producto>,
+
+    @InjectRepository(Categoria)
+    private readonly categoriaRepository: Repository<Categoria>,
+
 
   ) {}
   async create(createProductoDto: CreateProductoDto) {

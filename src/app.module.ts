@@ -3,6 +3,8 @@ import { ProductosModule } from './productos/productos.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriasModule } from './categorias/categorias.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -21,7 +23,11 @@ import { CategoriasModule } from './categorias/categorias.module';
     
     ProductosModule,
     
-    CategoriasModule],
+    CategoriasModule,
+    
+    UsuariosModule,
+    
+    RolesModule],
   controllers: [],
   providers: [],
 })

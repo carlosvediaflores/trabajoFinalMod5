@@ -14,4 +14,4 @@
 docker-compose up -d
 ```
 
-6. Levantar: ```yarn start:dev```
+6. Levantar: ```npm run start:dev```
