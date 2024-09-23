@@ -19,12 +19,12 @@ export class ProductosController {
   }
 
   @Get(':term')
-  findOne(@Param('term', ParseUUIDPipe) term: string) {
+  findOne(@Param('term') term: string) {
     return this.productosService.findOne(term);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductoDto: UpdateProductoDto) {
+  update(@Param('id', ParseUUIDPipe) id: string, @Body() updateProductoDto: UpdateProductoDto) {
     return this.productosService.update(id, updateProductoDto);
   }
 

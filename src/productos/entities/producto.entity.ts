@@ -32,7 +32,7 @@ export class Producto {
     })
     image: string[];
     
-    @ManyToOne(() => Categoria, categoria => categoria.productos)
+    @ManyToOne(() => Categoria, categoria => categoria.productos, { cascade: true, eager: true })
     categoria: Categoria; // un producto pertenece a una categoria
 
    
