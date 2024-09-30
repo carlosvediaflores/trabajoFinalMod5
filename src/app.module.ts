@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriasModule } from './categorias/categorias.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolesModule } from './roles/roles.module';
+import { PedidosModule } from './pedidos/pedidos.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -27,7 +29,11 @@ import { RolesModule } from './roles/roles.module';
     
     UsuariosModule,
     
-    RolesModule],
+    RolesModule,
+
+    CommonModule,
+    
+    PedidosModule],
   controllers: [],
   providers: [],
 })

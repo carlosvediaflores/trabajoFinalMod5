@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Headers } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { LoginUserDto, CreateUsuarioDto } from './dto';
 import { AuthGuard } from '@nestjs/passport';
+import { Auth, GetUser, RawHeaders, RoleProtected } from './decorators';
+import { Usuario } from './entities/usuario.entity';
+import { log } from 'console';
+import { IncomingHttpHeaders } from 'http';
+import { ValidRoles } from './interfaces';
+import { UserRoleGuard } from './guards/user-role.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
@@ -20,10 +28,18 @@ export class UsuariosController {
 
   @UseGuards( AuthGuard() )
   @Get()
-  findAll() {
+  findAll( @GetUser() user: Usuario,) {
+    log(user)
     return this.usuariosService.findAll();
   }
 
+  @Get('check-status')
+  @Auth()
+  checkAuthStatus(
+    @GetUser() user:Usuario
+  ) {
+    return this.usuariosService.checkAuthStatus( user );
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usuariosService.findOne(+id);

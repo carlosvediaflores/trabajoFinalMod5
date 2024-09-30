@@ -1,3 +1,4 @@
+import { Producto } from "src/productos/entities";
 import { Role } from "src/roles/entities/role.entity";
 import { BeforeInsert, BeforeUpdate, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -31,11 +32,11 @@ export class Usuario {
     })
     roles: string[]; */
 
-   /*  @OneToMany(
-        () => Product,
+    @OneToMany(
+        () => Producto,
         ( product ) => product.user
     )
-    product: Product; */
+    product: Producto;
 
     @ManyToMany(() => Role, {eager: true })
     @JoinTable()

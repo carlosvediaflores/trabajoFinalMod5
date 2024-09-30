@@ -7,7 +7,7 @@ export class Categoria {
     id: string;
 
     @Column({ length: 100})
-    nombre: string;
+    nombreCategoria: string;
 
     @Column({ default: "ACTIVO"})
     estado: string;

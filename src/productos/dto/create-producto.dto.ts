@@ -21,7 +21,7 @@ export class CreateProductoDto {
     @IsString({ each: true })
     @IsArray()
     @IsOptional()
-    image: string[];
+    images?: string[];
 
     @IsString()
     idCategoria: string;

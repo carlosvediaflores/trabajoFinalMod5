@@ -92,6 +92,15 @@ export class UsuariosService {
     return `This action removes a #${id} usuario`;
   }
 
+  async checkAuthStatus( user: Usuario ){
+
+    return {
+      ...user,
+      token: this.getJwtToken({ id: user.id })
+    };
+
+  }
+
   private getJwtToken( payload: JwtPayload ) {
 
     const token = this.jwtService.sign( payload );
