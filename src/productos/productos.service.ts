@@ -4,13 +4,13 @@ import { UpdateProductoDto } from './dto/update-producto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { Producto } from './entities/producto.entity';
-import { FilterDto } from './dto/filter-producto.dto';
 //import { isUUID } from 'class-validator';
 import { validate as isUUID } from 'uuid';
 import { Categoria } from 'src/categorias/entities/categoria.entity';
 import { log } from 'console';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { ProductImage } from './entities';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Injectable()
 export class ProductosService {
@@ -61,8 +61,8 @@ export class ProductosService {
 
   }
 
-  async findAll(filterDto:FilterDto) {
-    const { limit = 10, offset = 0 } = filterDto;
+  async findAll(paginationDtoDto:PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDtoDto;
 
     const products = this.productRepository.find({
       take: limit,

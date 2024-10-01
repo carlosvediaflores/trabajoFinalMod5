@@ -15,3 +15,34 @@ docker-compose up -d
 ```
 
 6. Levantar: ```npm run start:dev```
+
+# DOCUMENTACION BACKEND TIENDA API
+1. Ver dicumentación de API en: ```http://localhost:3000/api```
+
+# EJEMPLOS DOCUMENTACION BACKEND TIENDA API
+
+2. USUARIOS
+[ ADMIN ]
+Creacion de usuario
+```
+POST /usuarios/register 
+{
+    "email":"carlos@gmail.com",
+    "password":"Carlos1234",
+    "nombres":"carlos vedia",
+    "roles":["ADMIN"]
+}
+```
+Login
+```
+POST /usuarios/login 
+{
+    "email":"carlos@gmail.com",
+    "password":"Carlos1234",
+}
+```
+# Estructura Relacional de Base de Datos
+<p align="center">
+  <a href="./assets/tiendaDiplomadoDB - public.png" target="blank"><img src="./assets/tiendaDiplomadoDB - public.png" width="450" alt="tiendaDiplomadoDB" /></a>
+</p>
+

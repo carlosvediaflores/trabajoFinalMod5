@@ -103,7 +103,7 @@ export class PedidosService {
     this.clientFacturacion.emit('generar_factura', pedidoDetalle);
     
     console.log('envio de notificacion')
-    this.client.emit('notify_order_status_change', { id: id, estado: estado, email: 'carlosvf782@gmail.com' });
+    this.client.emit('notify_order_status_change', { id: id, estado: estado, email: 'heraldcnp@gmail.com' });
 
     pedido.estado = estado;
     return await this.pedidoRepository.save(pedido);

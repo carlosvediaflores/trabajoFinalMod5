@@ -9,14 +9,20 @@ import { log } from 'console';
 import { IncomingHttpHeaders } from 'http';
 import { ValidRoles } from './interfaces';
 import { UserRoleGuard } from './guards/user-role.guard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
+
   @Post('register')
+  @ApiResponse({ status: 201, description: 'Usuario creado exitosamente', type: Usuario  })
+  @ApiResponse({ status: 400, description: 'Bad request. Email ya existe registrado con este nombre' })
+  @ApiResponse({ status: 403, description: 'Forbidden. Token related.' })
+  @ApiResponse({ status: 500, description: 'Internal Server Error. Usuario no se encontró (request)' })
+  @ApiResponse({ status: 401, description: 'Error: No estas autorizado para acceder a este endpoind.' })
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
   }
@@ -28,6 +34,7 @@ export class UsuariosController {
 
   @UseGuards( AuthGuard() )
   @Get()
+  @ApiResponse({ status: 200, description: 'Lista de todos los usuarios', type: Usuario  })
   findAll( @GetUser() user: Usuario,) {
     log(user)
     return this.usuariosService.findAll();
@@ -35,6 +42,7 @@ export class UsuariosController {
 
   @Get('check-status')
   @Auth()
+  @ApiResponse({ status: 200, description: 'verificar token', type: Usuario  })
   checkAuthStatus(
     @GetUser() user:Usuario
   ) {
