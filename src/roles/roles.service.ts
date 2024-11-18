@@ -13,21 +13,22 @@ export class RolesService {
     private readonly rolRepository: Repository<Role>,
   ){}
 
-  create(createRoleDto: CreateRoleDto) {
+  createRol(createRoleDto: CreateRoleDto) {
     const role = this.rolRepository.create(createRoleDto);
     return this.rolRepository.save(role);
 
   }
 
   findAll() {
-    return `This action returns all roles`;
+    return this.rolRepository.find({})
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} role`;
+  async findOne(id: string) {
+    let roles = await this.rolRepository.findOneBy({ id: id });
+    return roles;
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
+  update(id: string, updateRoleDto: UpdateRoleDto) {
     return `This action updates a #${id} role`;
   }
 
