@@ -2,10 +2,10 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-## TEST MODULO %
+## TEST MODULO 5
 
 ```bash
-# Pruebas NITARIAS, INTEGRACION Y ACEPTACION SÓLO EN EL MODULO ROLES
+# Pruebas UNITARIAS, INTEGRACION Y ACEPTACION SÓLO EN EL MODULO ROLES
 $ npm run test:roles
 
 # e2e tests
