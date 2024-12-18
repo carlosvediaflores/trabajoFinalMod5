@@ -45,7 +45,7 @@ describe('RolesService', () => {
    
     jest.spyOn(service, 'createRol').mockImplementation(() => rol)
     const createRoleDto: CreateRoleDto = {
-      nombreRol: 'ADMIN',
+      description: 'usuario basico',
     }
     log(createRoleDto)
     expect(service.createRol(createRoleDto)).toBeInstanceOf(Role)
@@ -59,11 +59,11 @@ describe('RolesService', () => {
     
     jest.spyOn(service, 'update').mockImplementation(() => rol)
     const newRol: Partial<CreateRoleDto> = {
-      nombreRol: 'USER',
+      description: 'usuario basico',
     }
     const resultado:any = service.update('de7e95ba-031e-4d9d-a1d8-ced8b4e4c1fe', newRol)
     log('resp',resultado)
    // expect(resultado).toBeInstanceOf(rol)
-    expect(resultado.nombreRol).not.toBe(newRol.nombreRol)
+    expect(resultado.nombreRol).not.toBe(newRol.description)
   })
 });

@@ -38,7 +38,7 @@ describe('RolesController', () => {
   
   it('Debería crear Rol', () => {
     const createRoleDto: CreateRoleDto = {
-      nombreRol: 'USER',
+      description: 'usuario basico',
     }
     jest.spyOn(service, 'createRol').mockImplementation(() => dataRol)
     log(dataRol)

@@ -2,6 +2,18 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
+## TEST MODULO 5
+
+```bash
+# Pruebas UNITARIAS, INTEGRACION Y ACEPTACION SÓLO EN EL MODULO ROLES
+$ npm run test:roles
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
 
 # DIPLOMADO BACKEND TIENDA API
 
